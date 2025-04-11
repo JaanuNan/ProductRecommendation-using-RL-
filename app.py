@@ -337,7 +337,7 @@ def get_base64_of_image(image_path):
         return base64.b64encode(image_file.read()).decode()
 
 def main():
-    image_path = "C:/Users/User/Downloads/jan.jpg"  # Ensure correct file path
+    image_path = "images/background.jpg"  # Ensure correct file path
 
     base64_image = get_base64_of_image(image_path)
 
