@@ -47,7 +47,6 @@ Local Setup (for development or running locally):
 1. **Make sure you have Python 3.x installed.** 🐍
 2. **Install the necessary libraries:**
 pip install -r requirements.txt
-
 (Ensure your `requirements.txt` file in the project root looks something like this:
 streamlit
 numpy
@@ -55,9 +54,7 @@ torch
 matplotlib
 pandas
 seaborn
-plotly
-
-)
+plotly)
 3. **Run the Streamlit app:**
 streamlit run app.py
 
