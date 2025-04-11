@@ -626,6 +626,7 @@ def main():
         # Interactive Bar Chart of Action Probabilities
         fig_probs = px.bar(df_probs, x='Product', y='Probability', title='Action Probabilities')
         st.plotly_chart(fig_probs)
+
     st.subheader("👥 User Demographics")
     demographics_data = [profile["demographics"] for profile in user_profiles.values()]
     df_demographics = pd.DataFrame(demographics_data)
@@ -636,8 +637,10 @@ def main():
     occupation_counts = df_demographics['occupation'].value_counts()
     location_counts = df_demographics['location'].value_counts()
 
-    # Create a DataFrame with all unique indices and fill missing values
-    all_indices = sorted(list(set(age_counts.index) | set(occupation_counts.index) | set(location_counts.index)))
+    # Convert indices to a common type (string) before creating the union
+    all_indices = sorted(list(set(age_counts.index.astype(str)) |
+                              set(occupation_counts.index.astype(str)) |
+                              set(location_counts.index.astype(str))))
 
     data_for_multi_line_chart = pd.DataFrame({
         "Age Users": age_counts.reindex(all_indices, fill_value=0),
@@ -656,7 +659,6 @@ def main():
         </style>
         """, unsafe_allow_html=True)
     st.line_chart(data_for_multi_line_chart)
-
     if train_button and all_rewards:
         st.subheader("📈 Algorithm Performance Comparison")
         data_for_comparison = pd.DataFrame(dict([(k, pd.Series(v)) for k, v in all_rewards.items()]))
